@@ -1,0 +1,11 @@
+L1/obj/*.o
+L1/prog.o
+L1/prog.S
+L1/bin/*
+L1/runtime.o
+
+L2/obj/*.o
+L2/bin/*
+L2/tests/liveness/*.tmp
+L2/lib/tap/*
+L2/lib/temp/*
