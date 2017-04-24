@@ -1,9 +1,10 @@
 // by: Zhiping
 
-#include <L2.h>
+// #include <L2.h>
 #include <pegtl.hh>
 #include <pegtl/analyze.hh>
 #include <pegtl/contrib/raw_string.hh>
+#include <parser.h>
 
 using namespace pegtl;
 using namespace std;
@@ -815,6 +816,22 @@ namespace L2 {
     // L2::Instruction ti; // temp instruction
     std::vector<std::string> v;
     pegtl::file_parser(fileName).parse< L2::L2_function_rule, L2::action > (p, v);
+
+    return p;
+  }
+
+  Program L2_parse_file (char *fileName) {
+    /*
+     * Check the grammar for some possible issues.
+     */
+    pegtl::analyze< L2::L2_grammer >();
+    /*
+     * Parse.
+     */
+    L2::Program p;
+    // L2::Instruction ti; // temp instruction
+    std::vector<std::string> v;
+    pegtl::file_parser(fileName).parse< L2::L2_grammer, L2::action > (p, v);
 
     return p;
   }

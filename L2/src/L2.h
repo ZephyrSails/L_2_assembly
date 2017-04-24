@@ -1,4 +1,7 @@
 // by: Zhiping
+
+#pragma once
+
 #include <string>
 #include <vector>
 #include <utility>
@@ -13,6 +16,11 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <map>
+#include <fstream>
+#include <unistd.h>
+
+// #include <graph.cpp>
 
 namespace L2 {
 
@@ -20,6 +28,12 @@ namespace L2 {
   // const int ITEM_LABEL = 1;
   // const int ITEM_NUMBER = 2;
   // const int ITEM_VAR = 3;
+  // enum REGS {
+  //   r10, r11, r8, r9, rax, rcx, rdi, rdx, rsi,
+  //   r12, r13, r14, r15, rbp, rbx
+  // };
+  const std::vector< std::string > REGS = { "r10", "r11", "r8", "r9", "rax", "rcx", "rdi", "rdx", "rsi", "r12", "r13", "r14", "r15", "rbp", "rbx" };
+
   enum ITEM {
     REGISTER, LABEL, NUMBER, VAR
   };
@@ -28,17 +42,6 @@ namespace L2 {
     RETURN, LABEL_INS, W_START, MEM_START, CALL, GOTO, INC_DEC,
     CISC, CMP, CJUMP, STACK
   };
-  // const int INS_RETURN = 0;
-  // const int INS_LABEL = 1;
-  // const int INS_W_START = 2;
-  // const int INS_MEM_START = 10;
-  // const int INS_CALL = 3;
-  // const int INS_GOTO = 4;
-  // const int INS_INC_DEC = 5;
-  // const int INS_CISC = 6;
-  // const int INS_CMP = 7;
-  // const int INS_CJUMP = 8;
-  // const int INS_STACK = 9;
 
   struct L2_item {
     std::string labelName;
