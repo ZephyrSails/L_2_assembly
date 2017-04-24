@@ -1,7 +1,7 @@
 // by Zhiping
 
 #include <parser.h>
-#include <analysis.h>
+#include <graph.h>
 
 int main(int argc, char **argv) {
   bool verbose;
@@ -31,7 +31,8 @@ int main(int argc, char **argv) {
 
     std::set<std::string> IN[n];
     std::set<std::string> OUT[n];
-    L2::code_analysis(f);
+    L2::Graph g = L2::Graph(f);
+    // L2::code_analysis(f);
 
   }
 
