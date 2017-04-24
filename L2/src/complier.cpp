@@ -29,8 +29,8 @@ int main(int argc, char **argv) {
   for (auto f : p.functions) {
     int n = f->instructions.size();
 
-    std::set<std::string> IN[n];
-    std::set<std::string> OUT[n];
+    // std::set<std::string> IN[n];
+    // std::set<std::string> OUT[n];
     L2::Graph g = L2::Graph(f);
     // L2::code_analysis(f);
 

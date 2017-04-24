@@ -56,8 +56,8 @@ namespace L2 {
   void Graph::analyze(L2::Function *func) {
     int n = func->instructions.size();
 
-    std::set<std::string> GEN[n];
-    std::set<std::string> KILL[n];
+    std::set <std::string> GEN[n];
+    std::set <std::string> KILL[n];
 
     for (int k = 0; k < n; k++) {
       L2::Instruction *i = func->instructions.at(k);
@@ -79,6 +79,30 @@ namespace L2 {
     // Connect variables in KILL[i] with those in OUT[i]
     // Unless it is (x <- y)
     // Handle constrained arithmetic via extra edges
+
+    this->print();
   }
+
+  void Graph::print() {
+    for (auto const & nbs : this->neighbours) {
+      std::set<int>::iterator iter;
+      for(iter=nbs.begin(); iter!=nbs.end();++iter) {
+        std::cout << *iter << " ";
+      }
+      std::cout << "\n";
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

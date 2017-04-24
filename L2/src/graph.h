@@ -21,6 +21,7 @@ namespace L2 {
   private:
     void add_regs();
     void analyze(L2::Function *func);
+    void print();
   };
 
 }
