@@ -9,6 +9,7 @@ namespace L2 {
     std::vector< std::set < int > > neighbours;
     std::map< std::string, int > index;
     std::map< int, std::string > value;
+    std::set< std::string > hold;
 
   public:
     Graph();
@@ -20,6 +21,9 @@ namespace L2 {
 
   private:
     void add_regs();
+    void add_vars(std::set <std::string> VARS);
+    void add_edges(std::set <std::string> VARS);
+    void add_edges(std::set <std::string> VARS1, std::set <std::string> VARS2);
     void analyze(L2::Function *func);
     void print();
   };
