@@ -27,11 +27,14 @@ int main(int argc, char **argv) {
   L2::Program p = L2::L2_parse_file(argv[optind]);
 
   for (auto f : p.functions) {
-    int n = f->instructions.size();
+    // int n = f->instructions.size();
+    std::cout << f->name << "\n";
 
     // std::set<std::string> IN[n];
     // std::set<std::string> OUT[n];
-    L2::Graph g = L2::Graph(f);
+    L2::Graph g = L2::Graph(f, 15);
+    int c = g.coloring();
+    std::cout << "total color used " << c << "\n";
     // g.coloring();
     // L2::code_analysis(f);
 

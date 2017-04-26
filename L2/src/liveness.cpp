@@ -21,6 +21,9 @@ namespace L2 {
   }
 
   void union_set(std::set<std::string> * s, std::vector<std::string> * t, int n) {
+    if (n > t->size()) {
+      n = t->size();
+    }
     for (int i = 0; i < n; i++) {
       s->insert(t->at(i));
     }
@@ -66,8 +69,11 @@ namespace L2 {
               insert_item_to_set(GEN, i->items.at(1));
               break;
       case L2::INS::CALL:
+              // std::cout << "union_set1\n";
               union_set(GEN, &args_regs, i->items.at(0)->value);
+              // std::cout << "insert_item_to_set\n";
               insert_item_to_set(GEN, i->items.at(0));
+              // std::cout << "union_set2\n";
               union_set(KILL, &caller_save_regs);
               KILL->insert("rax");
               break;

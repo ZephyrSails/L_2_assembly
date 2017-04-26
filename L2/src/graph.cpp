@@ -70,20 +70,24 @@ namespace L2 {
     }
   }
 
-  Graph::Graph() {
-    this->add_regs();
-  }
+  // Graph::Graph() {
+  //   this->add_regs();
+  // }
 
-  Graph::Graph(L2::Function *func) {
+  Graph::Graph(L2::Function *func, int K) {
     // 1 node per variable
     // Registers are considered variables
     // Connect a register to all other registers (even those not used by f)
     this->add_regs();
     this->analyze(func);
-    this->coloring();
+
+    this->K = K;
+    this->TopColor = K;
+    // this->coloring();
   }
 
   void Graph::analyze(L2::Function *func) {
+    // std::cout << "start analyze(), building GEN, KILL\n";
     int n = func->instructions.size();
 
     std::set <std::string> GEN[n];
@@ -91,18 +95,20 @@ namespace L2 {
 
     for (int k = 0; k < n; k++) {
       L2::Instruction *i = func->instructions.at(k);
-
+      // std::cout << "gen_gen_kill():" << func->instructions[k]->items[0]->name << " " << func->instructions[k]->op << "\n";
       L2::gen_gen_kill(&GEN[k], &KILL[k], i);
     }
 
+    // std::cout << "building IN, OUT\n";
     std::set <std::string> IN[n];
     std::set <std::string> OUT[n];
 
     L2::liveness_analysis(func, GEN, KILL, IN, OUT);
 
+    // std::cout << "adding regs\n";
     for (int k = 0; k < n; k++) {
       this->add_vars(IN[k]);
-      this->add_vars(OUT[n]);
+      this->add_vars(OUT[k]);
 
       // Connect each pair of variables that belong to the same IN or OUT set
       this->add_edges(IN[k]);
@@ -122,7 +128,7 @@ namespace L2 {
       }
     }
 
-    this->print();
+    // this->print();
   }
 
   void Graph::print() {
@@ -141,7 +147,7 @@ namespace L2 {
     // std::map<Key, Value> m { ... /* initialize it */ ... };
 
     for (const auto &p : this->color) {
-        std::cout << "color[" << p.first << "] = " << p.second << '\n';
+        std::cout << "color[" << this->value[p.first] << "] = " << p.second << '\n';
     }
   }
 
@@ -219,11 +225,13 @@ namespace L2 {
     }
   }
 
-  void Graph::coloring() {
+  int Graph::coloring() {
+    // std::cout << "start to build_stack\n";
     this->build_stack();
-    // std::cout << "build_stack done";
+    // std::cout << "build_stack done\n";
     this->rebuild();
-    // std::cout << "rebuild done";
-    this->print_color();
+    // std::cout << "rebuild done\n";
+    // this->print_color();
+    return this->TopColor;
   }
 }
