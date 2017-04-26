@@ -21,18 +21,8 @@
 #include <tuple>
 #include <unistd.h>
 
-// #include <graph.cpp>
-
 namespace L2 {
 
-  // const int ITEM_REGISTER = 0;
-  // const int ITEM_LABEL = 1;
-  // const int ITEM_NUMBER = 2;
-  // const int ITEM_VAR = 3;
-  // enum REGS {
-  //   r10, r11, r8, r9, rax, rcx, rdi, rdx, rsi,
-  //   r12, r13, r14, r15, rbp, rbx
-  // };
   const std::vector< std::string > REGS = { "r10", "r11", "r8", "r9", "rax", "rcx", "rdi", "rdx", "rsi", "r12", "r13", "r14", "r15", "rbp", "rbx" };
 
   enum ITEM {
@@ -55,7 +45,7 @@ namespace L2 {
   };
 
   struct Instruction {
-    int type;     // defined by L1::INS_*TYPE*
+    int type;         // defined by L1::INS_*TYPE*
     std::vector<L2::Item *> items;
     std::string op;
   };

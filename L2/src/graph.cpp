@@ -70,10 +70,6 @@ namespace L2 {
     }
   }
 
-  // Graph::Graph() {
-  //   this->add_regs();
-  // }
-
   Graph::Graph(L2::Function *func, int K) {
     // 1 node per variable
     // Registers are considered variables
@@ -127,8 +123,6 @@ namespace L2 {
         }
       }
     }
-
-    // this->print();
   }
 
   void Graph::print() {
@@ -225,13 +219,23 @@ namespace L2 {
     }
   }
 
-  int Graph::coloring() {
+  std::vector< std::string > Graph::coloring() {
     // std::cout << "start to build_stack\n";
     this->build_stack();
     // std::cout << "build_stack done\n";
     this->rebuild();
+
+    this->print_color();
+
+    std::vector< std::string > spilling_table;
+
+    for (const auto &p : this->color) {
+      if (p.second >= this->K) {
+        spilling_table.push_back(this->value[p.first]);
+      }
+      // std::cout << "color[" << this->value[p.first] << "] = " << p.second << '\n';
+    }
     // std::cout << "rebuild done\n";
-    // this->print_color();
-    return this->TopColor;
+    return spilling_table;
   }
 }

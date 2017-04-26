@@ -9,7 +9,7 @@ namespace L2 {
 
   public:
     Graph(L2::Function *func, int K);
-    int coloring();
+    std::vector< std::string > coloring();
 
   private:
     int K;
