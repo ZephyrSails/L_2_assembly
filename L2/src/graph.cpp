@@ -80,6 +80,7 @@ namespace L2 {
     // Connect a register to all other registers (even those not used by f)
     this->add_regs();
     this->analyze(func);
+    this->coloring();
   }
 
   void Graph::analyze(L2::Function *func) {
@@ -134,5 +135,95 @@ namespace L2 {
       }
       std::cout << "\n";
     }
+  }
+
+  void Graph::print_color() {
+    // std::map<Key, Value> m { ... /* initialize it */ ... };
+
+    for (const auto &p : this->color) {
+        std::cout << "color[" << p.first << "] = " << p.second << '\n';
+    }
+  }
+
+  void Graph::stack_node(int n) {
+    //// map < int, set >: who has been deleted, and their edges
+    // set < int > stacked: who has been deleted
+    // vector < int > stack:
+
+    // this->stacked.insert(n);
+    this->stack.push_back(n);
+  }
+
+  void Graph::build_stack() {
+    // vector < tuple > order: [(,), (,), |  (,), (,)]
+    for (int k = 0; k < this->neighbours.size(); k++) {
+      std::tuple< int, int > curOrder = {this->neighbours[k].size(), k};
+      this->order.push_back(curOrder);
+    }
+    // std::cout << "mark node by neighbours done";
+    std::sort(this->order.begin(), this->order.end());
+    // std::cout << "sort node by neighbours done";
+
+    int indexK = this->order.size() - 1;
+    for (int k = 0; k < this->order.size(); k++) {
+      if (std::get<0>(this->order[k]) >= this->K) {
+        indexK = k - 1;
+      }
+    }
+    // std::cout << "sort node by neighbours done";
+
+    for (int k = indexK; k >= 0; k--) {
+      this->stack_node(std::get<1>(this->order[k]));
+    }
+
+    for (int k = this->order.size() - 1; k > indexK; k--) {
+      this->stack_node(std::get<1>(this->order[k]));
+    }
+  }
+
+  bool Graph::color_useable(int n, int c) {
+    std::set< int >::iterator i;
+    for (i = neighbours[n].begin(); i != neighbours[n].end(); ++i) {
+      if ((*i < this->K && this->color[*i] == c)
+          || (this->color.count(*i) == 1 && this->color[*i] == c)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void Graph::assign_color(int n) {
+    if (n < this->K) {
+      return;
+    }
+
+    for (int c = 0; c < this->TopColor; c++) {
+      if (this->color_useable(n, c)) {
+        this->color[n] = c;
+        return;
+      }
+    }
+    this->color[n] = this->TopColor;
+    this->TopColor++;
+  }
+
+  void Graph::rebuild() {
+    // map < int, int > color
+    // vector < int > color
+    for (int k = 0; k < this->K; k++) {
+      this->color[k] = k;
+    }
+
+    for (int k = this->stack.size()-1; k >= 0; k--) {
+      this->assign_color(this->stack[k]);
+    }
+  }
+
+  void Graph::coloring() {
+    this->build_stack();
+    // std::cout << "build_stack done";
+    this->rebuild();
+    // std::cout << "rebuild done";
+    this->print_color();
   }
 }

@@ -32,6 +32,7 @@ int main(int argc, char **argv) {
     // std::set<std::string> IN[n];
     // std::set<std::string> OUT[n];
     L2::Graph g = L2::Graph(f);
+    // g.coloring();
     // L2::code_analysis(f);
 
   }

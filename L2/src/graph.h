@@ -10,6 +10,14 @@ namespace L2 {
     std::map< std::string, int > index;
     std::map< int, std::string > value;
     std::set< std::string > hold;
+    // std::vector<  > color;
+    std::vector< std::tuple< int, int > > order;
+    // std::map < int, std::set < int > > stacked;
+    std::vector< int > stack;
+    std::map< int, int > color;
+
+    int K = 15;
+    int TopColor = 15;
 
   public:
     Graph();
@@ -26,6 +34,15 @@ namespace L2 {
     void add_edges(std::set <std::string> VARS1, std::set <std::string> VARS2);
     void analyze(L2::Function *func);
     void print();
+    void print_color();
+
+    void coloring();
+    void rebuild();
+    void assign_color(int n);
+    bool color_useable(int n, int c);
+    void build_stack();
+    void stack_node(int n);
+
   };
 
 }
