@@ -15,8 +15,6 @@ namespace L2 {
   }
 
   void Graph::add_var(std::string var) {
-    // std::cout << "what?";
-    // if (this->hold.find(var) != this->hold.end()) {
     if (this->hold.count(var) == 0) {
       this->hold.insert(var);
       int i = neighbours.size();
@@ -77,10 +75,8 @@ namespace L2 {
     // Registers are considered variables
     // Connect a register to all other registers (even those not used by f)
     this->add_regs();
-    // std::cout << "hehehheheeheh " << func->instructions[0]->items[0]->name << "\n";
     this->analyze(func);
 
-    // std::cout << "hehehheheeheh " << this->get_color(func->instructions[0]->items[0]->name) << "\n";
     this->K = K;
     this->TopColor = K;
     // this->coloring();

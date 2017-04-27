@@ -807,13 +807,13 @@ namespace L2 {
     }
   };
 
-  template<> struct action < L2_instruction > {
-    static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
-      // v.push_back(in.string());
-      // cout << in.string() << "\n";
-      // cout << "tinkering action label " << in.string() << endl;
-    }
-  };
+  // template<> struct action < L2_instruction > {
+  //   static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
+  //     // v.push_back(in.string());
+  //     // cout << in.string() << "\n";
+  //     // cout << "tinkering action label " << in.string() << endl;
+  //   }
+  // };
 
   /*
    * Data structures required to parse

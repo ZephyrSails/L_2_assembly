@@ -118,15 +118,6 @@ namespace L2 {
     // }
   }
 
-  // L2::Graph interferences_analysis(L2::Function *func, std::set <std::string> *KILL, std::set <std::string> *IN, std::set <std::string> *OUT) {
-  //
-  //   L2::Graph g = L2::Graph();
-  //
-  //   g.analysis(func);
-  //
-  //   return g;
-  // }
-
   void liveness_analysis(L2::Function *func, std::set <std::string> *GEN, std::set <std::string> *KILL, std::set <std::string> *IN, std::set <std::string> *OUT) {
     std::map<std::string, int> labelNextIndexMap = build_label_map(func->instructions);
 
@@ -207,25 +198,4 @@ namespace L2 {
     // }
     // cout << ")\n\n)";
   }
-
-  // L2::Graph code_analysis(L2::Function *func) {
-  //   int n = func->instructions.size();
-  //
-  //   std::set<std::string> GEN[n];
-  //   std::set<std::string> KILL[n];
-  //
-  //   for (int k = 0; k < n; k++) {
-  //     L2::Instruction *i = func->instructions.at(k);
-  //
-  //     gen_gen_kill(&GEN[k], &KILL[k], i);
-  //     // We need to build GEN and KILL here
-  //   }
-  //
-  //   std::set <std::string> IN[n];
-  //   std::set <std::string> OUT[n];
-  //
-  //   liveness_analysis(func, GEN, KILL, IN, OUT);
-  //
-  //   return interferences_analysis(func, KILL, IN, OUT);
-  // }
 }
