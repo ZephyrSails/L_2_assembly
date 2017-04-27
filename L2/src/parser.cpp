@@ -509,8 +509,8 @@ namespace L2 {
     static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
       L2::Function *currentF = p.functions.back();
       L2::Instruction *newIns = new L2::Instruction();
-      std::cout << "hello ins_w_start " << in.string() << " "<< v.size() <<  "\n";// << v.at(0) << " " << v[1] << " " << v[2] << "\n" ;
-      std::cout << "hello ins_w_start " << v.at(0) << " " << v[1] << " " << v[2] << " " << v[3] << "\n" ;
+      // std::cout << "hello ins_w_start " << in.string() << " "<< v.size() <<  "\n";// << v.at(0) << " " << v[1] << " " << v[2] << "\n" ;
+      // std::cout << "hello ins_w_start " << v.at(0) << " " << v[1] << " " << v[2] << " " << v[3] << "\n" ;
       if (v.size() == 3) { // no mem, two op
         newIns->type = L2::INS::W_START;
         // cout << "tinkering no mem assign: " << v.at(0) << " " << v.at(1) << " " << v.at(2) << endl;
@@ -526,7 +526,7 @@ namespace L2 {
         newIns->items.push_back(new_item(v.at(0)));
       } else if (v.size() == 4) {
         if (v.at(2) == "stack-arg") { // stack-arg
-          std::cout << "hello stack\n";
+          // std::cout << "hello stack\n";
           newIns->type = L2::INS::STACK;
           newIns->op = v[1];
 
@@ -657,11 +657,11 @@ namespace L2 {
   //
   // Actions to collect string from rules, should be a better way.
   //
-  template<> struct action < stack_arg_sign > {
-    static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
-      v.push_back(in.string());
-    }
-  };
+  // template<> struct action < stack_arg_sign > {
+  //   static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
+  //     v.push_back(in.string());
+  //   }
+  // };
 
   template<> struct action < inc_dec > {
     static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
