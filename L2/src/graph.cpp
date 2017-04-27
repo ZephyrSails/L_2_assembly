@@ -77,10 +77,10 @@ namespace L2 {
     // Registers are considered variables
     // Connect a register to all other registers (even those not used by f)
     this->add_regs();
-    std::cout << "hehehheheeheh " << func->instructions[0]->items[0]->name << "\n";
+    // std::cout << "hehehheheeheh " << func->instructions[0]->items[0]->name << "\n";
     this->analyze(func);
 
-    std::cout << "hehehheheeheh " << this->get_color(func->instructions[0]->items[0]->name) << "\n";
+    // std::cout << "hehehheheeheh " << this->get_color(func->instructions[0]->items[0]->name) << "\n";
     this->K = K;
     this->TopColor = K;
     // this->coloring();
