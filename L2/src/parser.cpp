@@ -101,29 +101,6 @@ namespace L2 {
       >
     > {};
 
-  // struct L2_var:
-  //   pegtl::at<
-  //     pegtl::seq<
-  //       pegtl::plus<
-  //         pegtl::sor<
-  //           pegtl::alpha,
-  //           pegtl::one< '_' >
-  //         >
-  //       >,
-  //       pegtl::star<
-  //         pegtl::sor<
-  //           pegtl::alpha,
-  //           pegtl::one< '_' >,
-  //           pegtl::digit
-  //         >
-  //       >
-  //     >,
-  //     pegtl::not_at<
-  //       // pegtl::string < 'c', 'a', 'l', 'l' >
-  //       call
-  //     >
-  //   > {};
-
   struct L2_label:
     pegtl::seq<
       pegtl::one<':'>,
@@ -413,7 +390,6 @@ namespace L2 {
   /*
    * Helpers
    */
-
   Item * new_item(std::string str) {
     Item *item = new Item();
     if (str[0] == ':') { // label
@@ -678,10 +654,6 @@ namespace L2 {
 
   template<> struct action < var > {
     static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
-      // cout << in.string();
-      // std::string token = in.string();
-      // token.insert(0, ".");
-      // v.push_back(token);
       v.push_back(in.string());
       // cout << "tinkering action call " << in.string() << endl;
     }
@@ -691,7 +663,6 @@ namespace L2 {
     static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
       v.push_back(in.string());
       // cout << "tinkering action call " << in.string() << endl;
-      // cout << in.string();
     }
   };
 
@@ -806,14 +777,6 @@ namespace L2 {
       // cout << "tinkering action label " << in.string() << endl;
     }
   };
-
-  // template<> struct action < L2_instruction > {
-  //   static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
-  //     // v.push_back(in.string());
-  //     // cout << in.string() << "\n";
-  //     // cout << "tinkering action label " << in.string() << endl;
-  //   }
-  // };
 
   /*
    * Data structures required to parse
