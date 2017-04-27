@@ -33,7 +33,7 @@ void output_instruction(L2::Instruction * i, std::ofstream * outputFile, L2::Gra
             break;
     case L2::INS::MEM_START:
             *outputFile << "(mem " << warp_item(i->items[0], g) << " " << std::to_string(i->items[0]->value) << ") " << i->op << " " << warp_item(i->items[1], g) << ")";
-            // break;
+            break;
     case L2::INS::W_START:
             if ((i->items[1]->type == L2::ITEM::REGISTER || i->items[1]->type == L2::ITEM::VAR) && i->items[1]->value != -1) {
               *outputFile << "(" << warp_item(i->items[0], g) << " " << i->op << " (mem " << warp_item(i->items[1], g) << " " << std::to_string(i->items[1]->value) << "))";

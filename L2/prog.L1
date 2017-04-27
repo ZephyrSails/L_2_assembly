@@ -1,7 +1,29 @@
 (:go
 	(:go
 		0 0
-		(r10 <- 5)
+		(mem r10 -8) <- :ret)
+		(mem r10 -16) <- 13)
+		(mem r10 -24) <- 15)
+		(mem r10 -32) <- 17)
+		(call :printValues 9)
+		:ret
+		(return)
+	)
+
+	(:printValues
+		9 1
+		(r10 <- 0)
+		(rdi <- r10)
+		(r10 <- (mem r10 0))
+		(call r10 1)
+		(r10 <- 8)
+		(rdi <- r10)
+		(r10 <- (mem r10 0))
+		(call r10 1)
+		(r10 <- 16)
+		(rdi <- r10)
+		(r10 <- (mem r10 0))
+		(call r10 1)
 		(return)
 	)
 
