@@ -12,13 +12,13 @@
 
 	(:printValues
 		9 0
-		(r10 <- 0)
+		(r10 <- (mem rsp 0))
 		(rdi <- r10)
 		(call print 1)
-		(r10 <- 8)
+		(r10 <- (mem rsp 8))
 		(rdi <- r10)
 		(call print 1)
-		(r10 <- 16)
+		(r10 <- (mem rsp 16))
 		(rdi <- r10)
 		(call print 1)
 		(return)
