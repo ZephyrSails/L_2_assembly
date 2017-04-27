@@ -1,23 +1,26 @@
 (:go
 	(:go
 		0 0
-		(rdi <- 3)
-		(rsi <- 5)
-		(rdx <- 7)
-		(rcx <- 9)
-		(r8 <- 11)
-		(r9 <- 5)
-		((mem rsp -8) <- :testFunction_ret)
-		((mem rsp -16) <- 15)
-		(call :testFunction 7)
-		:testFunction_ret
+		((mem rsp -8) <- :ret)
+		((mem rsp -16) <- 13)
+		((mem rsp -24) <- 15)
+		((mem rsp -32) <- 17)
+		(call :printValues 9)
+		:ret
 		(return)
 	)
 
-	(:testFunction
-		7 0
-		(rdi <- (mem rsp 0))
-		(call r10 1)
+	(:printValues
+		9 0
+		(r10 <- 0)
+		(rdi <- r10)
+		(call print 1)
+		(r10 <- 8)
+		(rdi <- r10)
+		(call print 1)
+		(r10 <- 16)
+		(rdi <- r10)
+		(call print 1)
 		(return)
 	)
 

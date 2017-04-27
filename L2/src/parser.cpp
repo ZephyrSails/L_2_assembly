@@ -422,7 +422,7 @@ namespace L2 {
       item->type = L2::ITEM::REGISTER;
       item->name = str;
       item->value = -1;
-    } else if (str == "print" && str == "allocate" && str == "array-error") {
+    } else if (str == "print" || str == "allocate" || str == "array-error") {
       item->type = L2::ITEM::LIBFUNC;
       item->name = str;
       item->value = -1;
