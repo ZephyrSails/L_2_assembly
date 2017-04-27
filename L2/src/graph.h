@@ -8,8 +8,11 @@ namespace L2 {
   class Graph {
 
   public:
+    Graph();
     Graph(L2::Function *func, int K);
     std::vector< std::string > coloring();
+
+    std::string get_color(std::string reg);
 
   private:
     int K;

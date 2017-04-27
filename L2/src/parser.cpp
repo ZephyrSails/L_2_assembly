@@ -412,34 +412,39 @@ namespace L2 {
    */
 
   Item * new_item(std::string str) {
-   Item *item = new Item();
-   if (str[0] == ':') { // label
-     item->type = L2::ITEM::LABEL;
-     str.erase(0, 1);  // remove ":"
-     item->name = str;
-   } else if (str[0] == 'r') { // register
-     item->type = L2::ITEM::REGISTER;
-     item->name = str;
-     item->value = -1;
-   } else {
-     try { // number
-       item->value = std::stoi(str);
-       item->type = L2::ITEM::NUMBER;
-     } catch(const std::exception& e) { // var
-       item->type = L2::ITEM::VAR;
-      //  str.erase(0, 1);
-       item->name = str;
-       item->value = -1;
-     }
-   }
-   return item;
+    Item *item = new Item();
+    if (str[0] == ':') { // label
+      item->type = L2::ITEM::LABEL;
+      str.erase(0, 1);  // remove ":"
+      item->name = str;
+    } else if (std::find(L2::REGS.begin(), L2::REGS.end(), str) != L2::REGS.end()) { // register
+    // } else if (str[0] == 'r') { // register
+      item->type = L2::ITEM::REGISTER;
+      item->name = str;
+      item->value = -1;
+    } else if (str == "print" && str == "allocate" && str == "array-error") {
+      item->type = L2::ITEM::LIBFUNC;
+      item->name = str;
+      item->value = -1;
+    } else {
+      try { // number
+        item->value = std::stoi(str);
+        item->type = L2::ITEM::NUMBER;
+      } catch (const std::exception& e) { // var
+        item->type = L2::ITEM::VAR;
+        //  str.erase(0, 1);
+        item->name = str;
+        item->value = -1;
+      }
+    }
+    return item;
   }
   //
   Item * new_item2(std::string reg, std::string offset) {
-   Item *item = new Item();
-   item = new_item(reg);
-   item->value = std::stoi(offset);
-   return item;
+    Item *item = new_item(reg);
+    //  item = ;
+    item->value = std::stoi(offset);
+    return item;
   }
 
   /*

@@ -24,12 +24,13 @@ namespace L2 {
       i->name = spill_str;
 
       L2::Item * dummy_var = new L2::Item();
-      dummy_var->type = L2::ITEM::REGISTER;
+      dummy_var->type = L2::ITEM::VAR;
       dummy_var->name = spill_str;
+      dummy_var->value = -1;
 
       // dummy_item->value =
       L2::Item * dummy_mem = new L2::Item();
-      dummy_mem->type = L2::ITEM::REGISTER;
+      dummy_mem->type = L2::ITEM::VAR;
       dummy_mem->name = "rsp";
       dummy_mem->value = (locals-1) * 8;
 

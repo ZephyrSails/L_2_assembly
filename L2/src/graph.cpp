@@ -70,13 +70,17 @@ namespace L2 {
     }
   }
 
+  Graph::Graph() {}
+
   Graph::Graph(L2::Function *func, int K) {
     // 1 node per variable
     // Registers are considered variables
     // Connect a register to all other registers (even those not used by f)
     this->add_regs();
+    std::cout << "hehehheheeheh " << func->instructions[0]->items[0]->name << "\n";
     this->analyze(func);
 
+    std::cout << "hehehheheeheh " << this->get_color(func->instructions[0]->items[0]->name) << "\n";
     this->K = K;
     this->TopColor = K;
     // this->coloring();
@@ -221,9 +225,11 @@ namespace L2 {
 
   std::vector< std::string > Graph::coloring() {
     // std::cout << "start to build_stack\n";
+    this->print();
     this->build_stack();
     // std::cout << "build_stack done\n";
     this->rebuild();
+
 
     this->print_color();
 
@@ -237,5 +243,9 @@ namespace L2 {
     }
     // std::cout << "rebuild done\n";
     return spilling_table;
+  }
+
+  std::string Graph::get_color(std::string reg) {
+    return this->value[this->color[this->index[reg]]];
   }
 }

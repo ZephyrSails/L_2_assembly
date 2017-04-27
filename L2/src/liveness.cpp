@@ -10,7 +10,8 @@ namespace L2 {
   // utility
   void insert_item_to_set(std::set<std::string> * s, L2::Item * i) {
     if (i->type == L2::ITEM::REGISTER || i->type == L2::ITEM::VAR) {
-      if (i->name != "rsp" && i->name != "print" && i->name != "allocate" && i->name != "array-error") {
+      // if (i->name != "rsp" && i->name != "print" && i->name != "allocate" && i->name != "array-error") {
+      if (i->name != "rsp") {
         s->insert(i->name);
       }
     }
