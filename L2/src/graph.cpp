@@ -107,6 +107,13 @@ namespace L2 {
 
     // std::cout << "adding regs\n";
     for (int k = 0; k < n; k++) {
+      for (int j = 0; j < func->instructions[k]->items.size(); j++) {
+        L2::Item * i = func->instructions[k]->items[j];
+        if (i->type == L2::ITEM::VAR) {
+          this->add_var(i->name);
+        }
+      }
+
       this->add_vars(IN[k]);
       this->add_vars(OUT[k]);
 
