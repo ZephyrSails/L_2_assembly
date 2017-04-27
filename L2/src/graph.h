@@ -1,5 +1,9 @@
 #pragma once
 
+// Used to do:
+//   code analyze.
+//   coloring.
+
 #include <L2.h>
 #include <liveness.h>
 
@@ -28,7 +32,6 @@ namespace L2 {
     std::vector< int > stack;
     std::map< int, int > color;
     // basic
-    // Graph();
     void add_edge(std::string var1, std::string var2);
     void add_edge(int i1, int i2);
     void add_var(std::string var);
