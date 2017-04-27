@@ -225,13 +225,13 @@ namespace L2 {
 
   std::vector< std::string > Graph::coloring() {
     // std::cout << "start to build_stack\n";
-    this->print();
+    // this->print();
     this->build_stack();
     // std::cout << "build_stack done\n";
     this->rebuild();
 
 
-    this->print_color();
+    // this->print_color();
 
     std::vector< std::string > spilling_table;
 
