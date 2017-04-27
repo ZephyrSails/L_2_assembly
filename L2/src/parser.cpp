@@ -657,11 +657,11 @@ namespace L2 {
   //
   // Actions to collect string from rules, should be a better way.
   //
-  // template<> struct action < stack_arg_sign > {
-  //   static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
-  //     v.push_back(in.string());
-  //   }
-  // };
+  template<> struct action < stack_arg_sign > {
+    static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
+      v.push_back(in.string());
+    }
+  };
 
   template<> struct action < inc_dec > {
     static void apply( const pegtl::input & in, L2::Program & p, std::vector<std::string> & v ) {
