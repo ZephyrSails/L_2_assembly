@@ -246,6 +246,9 @@ namespace L2 {
   }
 
   std::string Graph::get_color(std::string reg) {
+    if (reg == "rsp") {
+      return "rsp";
+    }
     return this->value[this->color[this->index[reg]]];
   }
 }
