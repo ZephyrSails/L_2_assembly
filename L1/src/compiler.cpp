@@ -54,7 +54,7 @@ std::map<std::string, std::string> init_eight_bit_reg_map() {
 }
 
 void return_ins(std::ofstream * outputFile, L1::Instruction * i, L1::Function * f) {
-  int offset = f->locals;
+  int64_t offset = f->locals;
   if (f->arguments > 6) {
     offset += f->arguments - 6;
   }
@@ -115,7 +115,7 @@ void mem_or_w_start_ins(std::ofstream * outputFile, L1::Instruction * i, L1::Fun
 void call_ins(std::ofstream * outputFile, L1::Instruction * i, L1::Function * f) {
   L1::Item * item = i->items.at(0);
   if (item->name.at(0) == ':' || item->name.at(0) == 'r') {  // self defined func
-    int rsp_offset;
+    int64_t rsp_offset;
     if (item->name.at(0) == ':') {
       item->name.erase(0, 1);
       item->name.insert(0, "_");

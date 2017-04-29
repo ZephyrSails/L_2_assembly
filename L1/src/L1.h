@@ -6,32 +6,32 @@
 
 namespace L1 {
 
-  const int ITEM_REGISTER = 0;
-  const int ITEM_LABEL = 1;
-  const int ITEM_NUMBER = 2;
+  const int64_t ITEM_REGISTER = 0;
+  const int64_t ITEM_LABEL = 1;
+  const int64_t ITEM_NUMBER = 2;
 
-  const int INS_RETURN = 0;
-  const int INS_LABEL = 1;
-  const int INS_MEM_OR_W_START = 2;
-  const int INS_CALL = 3;
-  const int INS_GOTO = 4;
-  const int INS_INC_DEC = 5;
-  const int INS_CISC = 6;
-  const int INS_CMP = 7;
-  const int INS_CJUMP = 8;
+  const int64_t INS_RETURN = 0;
+  const int64_t INS_LABEL = 1;
+  const int64_t INS_MEM_OR_W_START = 2;
+  const int64_t INS_CALL = 3;
+  const int64_t INS_GOTO = 4;
+  const int64_t INS_INC_DEC = 5;
+  const int64_t INS_CISC = 6;
+  const int64_t INS_CMP = 7;
+  const int64_t INS_CJUMP = 8;
 
   struct L1_item {
     std::string labelName;
   };
 
   struct Item {
-    int type;         // defined by L1::ITEM_*TYPE*
+    int64_t type;         // defined by L1::ITEM_*TYPE*
     std::string name; // for register & label
     int64_t value;        // for register (offset) & number
   };
 
   struct Instruction {
-    int type;     // defined by L1::INS_*TYPE*
+    int64_t type;     // defined by L1::INS_*TYPE*
     std::vector<L1::Item *> items;
     // L1::Opperand op;
     std::string op;
