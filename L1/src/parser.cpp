@@ -392,7 +392,7 @@ namespace L1 {
       pegtl::plus< L1_function_rule >
     > {};
 
-  struct entry_point_rule:
+  struct entry_point64_t_rule:
     pegtl::seq<
       seps,
       pegtl::one< '(' >,
@@ -407,7 +407,7 @@ namespace L1 {
 
   struct grammar:
     pegtl::must<
-      entry_point_rule
+      entry_point64_t_rule
     > {};
 
   /*
@@ -435,7 +435,7 @@ namespace L1 {
   vector< std::string > split_by_space(std::string str) {
     // string str("Split me by whitespaces");
     std::string buf; // Have a buffer string
-    std::stringstream ss(str); // Insert the string into a stream
+    std::stringstream ss(str); // Insert the string int64_to a stream
     vector<std::string> tokens; // Create vector to hold our words
 
     while (ss >> buf)
