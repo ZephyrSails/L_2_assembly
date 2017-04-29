@@ -1,0 +1,15 @@
+(:go
+	(:go
+		0 0
+		(rcx <- 3)
+		(r10 <- 5)
+		(r10 <- r10)
+		(r10 <<= rcx)
+		(r10++)
+		(rdi <- r10)
+		(call print 1)
+		(rax <- 0)
+		(return)
+	)
+
+)
