@@ -36,7 +36,7 @@ namespace L1 {
       item->value = -1;
     } else { // number
       item->type = ITEM_NUMBER;
-      item->value = std::stoi(str);
+      item->value = std::stoll(str);
     }
     return item;
 
@@ -46,7 +46,7 @@ namespace L1 {
     Item *item = new Item();
     item->type = ITEM_REGISTER;
     item->name = reg;
-    item->value = std::stoi(offset);
+    item->value = std::stoll(offset);
     return item;
   }
 
@@ -575,7 +575,7 @@ namespace L1 {
       Item *item = new Item();
       item->type = ITEM_REGISTER;
       item->name = v.at(1);
-      item->value = std::stoi(v.at(2));
+      item->value = std::stoll(v.at(2));
       newIns->items.push_back(item);
 
       currentF->instructions.push_back(newIns);

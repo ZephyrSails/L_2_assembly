@@ -42,7 +42,7 @@ namespace L2 {
   struct Item {
     int type;         // defined by L1::ITEM_*TYPE*
     std::string name; // for register & label
-    int value;        // for register (offset) & number
+    int64_t value;        // for register (offset) & number
   };
 
   struct Instruction {

@@ -407,7 +407,7 @@ namespace L2 {
       item->value = -1;
     } else {
       try { // number
-        item->value = std::stoi(str);
+        item->value = std::stoll(str);
         item->type = L2::ITEM::NUMBER;
       } catch (const std::exception& e) { // var
         item->type = L2::ITEM::VAR;
@@ -422,7 +422,7 @@ namespace L2 {
   Item * new_item2(std::string reg, std::string offset) {
     Item *item = new_item(reg);
     //  item = ;
-    item->value = std::stoi(offset);
+    item->value = std::stoll(offset);
     return item;
   }
 
