@@ -1,5 +1,5 @@
-(go:
-  (go:
+(:go
+  (:go
     0 0
     (rdi <- 5)
     (rsi <- 7)
@@ -8,9 +8,10 @@
     ((mem rsp -8) <- :printArray_ret)
     (call :printArray 1)
     :printArray_ret
+    (return)
   )
 
-  (printArray:
+  (:printArray
     1 2
     ((mem rsp 0) <- r12)
     ((mem rsp 8) <- r13)
@@ -41,7 +42,7 @@
     (return)
   )
 
-  (printArrayElement:
+  (:printArrayElement
     2 4
     ((mem rsp 0) <- r12)
     ((mem rsp 8) <- r13)
@@ -86,7 +87,7 @@
     :recurseArr
     (rdi <- (mem rdx 0))
     ((mem rsp -8) <- :ret_printArrayElement)
-    (call printArray 1)
+    (call :printArray 1)
 
     :ret_printArrayElement
 
