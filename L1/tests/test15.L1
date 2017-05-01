@@ -56,7 +56,7 @@
     ((mem rsp 16) <- r14)
     ((mem rsp 24) <- r15)
 
-    ; Store the input
+    ; Store the input ???? encode?
     (r12 <- rdi)    ; the pointer to the array
     (r13 <- rsi)    ; the element number to print (elements start from 0)
 
@@ -114,7 +114,7 @@
     (r13 <- (mem rsp 8))
     (r14 <- (mem rsp 16))
     (r15 <- (mem rsp 24))
- 
+
     (return)
   )
 )
