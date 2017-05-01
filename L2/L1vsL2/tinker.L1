@@ -1,0 +1,101 @@
+(:go
+  (:go
+    0 0
+    (rdi <- 5)
+    (rsi <- 7)
+    (call allocate 2)
+    (rdi <- rax)
+    ((mem rsp -8) <- :printArray_ret)
+    (call :printArray 1)
+    :printArray_ret
+    (return)
+  )
+
+  (:printArray
+    1 2
+    ((mem rsp 0) <- r12)
+    ((mem rsp 8) <- r13)
+    ((mem rsp 16) <- r14)
+
+    ; array itself
+    (r12 <- rdi)
+    ; index
+    (r13 <- 0)
+    ; length of the array
+    (r14 <- (mem rdi 0))
+
+    :loop
+    (rdi <- r12)
+    (rsi <- r13)
+    ((mem rsp -16) <- :printArrayElement_ret)
+    (call :printArrayElement 2)
+    :printArrayElement_ret
+    (r13++)
+
+    (cjump r13 < r14 :loop :ret)
+
+    :ret
+    (r12 <- (mem rsp 0))
+    (r13 <- (mem rsp 8))
+    (r14 <- (mem rsp 16))
+
+    (return)
+  )
+
+  (:printArrayElement
+    2 4
+    ((mem rsp 0) <- r12)
+    ((mem rsp 8) <- r13)
+    ((mem rsp 16) <- r14)
+    ((mem rsp 24) <- r15)
+
+    ; Store the input
+    (r12 <- rdi)    ; the pointer to the array
+    (r13 <- rsi)    ; the element number to print (elements start from 0)
+
+    ; Encode & Print the index
+    (r13 <<= 1)
+    (r13 += 1)
+    (rdi <- r13)
+    (call print 1)
+    (r13 >>= 1)
+
+    ; Print the offset of the array element in the L1 data layout
+    (r14 <- r13)
+    (r14 *= 8)
+    (r14 += 8)
+    (r14 <<= 1)
+    (r14 += 1)
+    (rdi <- r14)
+    (call print 1)
+    (r14 >>= 1)
+
+    ; Fetch
+    (rdx <- r14)
+    (rdx += r12)
+    (r15 <- (mem rdx 0))
+    (r15 &= 1)
+
+    ; Pointer or Number?
+    (cjump r15 = 1 :printEle :recurseArr)
+
+    :printEle
+    (rdi <- (mem rdx 0))
+    (call print 1)
+    (goto :ret_printArrayElement)
+
+    :recurseArr
+    (rdi <- (mem rdx 0))
+    ((mem rsp -8) <- :ret_printArrayElement)
+    (call :printArray 1)
+
+    :ret_printArrayElement
+
+    (r12 <- (mem rsp 0))
+    (r13 <- (mem rsp 8))
+    (r14 <- (mem rsp 16))
+    (r15 <- (mem rsp 24))
+
+    (return)
+  )
+)

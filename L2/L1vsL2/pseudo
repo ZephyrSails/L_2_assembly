@@ -1,0 +1,35 @@
+bool printArray (int64_t a[]){
+
+   if (a is not an array) return false ;
+
+    for (int64_t c=0; c < a.length; c++){
+
+       printArrayElement(a, c);
+
+    }
+
+    return true;
+
+}
+
+
+
+void printArrayElement (int64_t a[], int64_t i){
+
+    print(i) ; // Print the index
+
+    print((i * 8) + 8) ; // Print the offset of the array element in the L1 data layout
+
+    if (a[i] is not an array){
+
+        print(a[i]) ;
+
+    } else {
+
+        printArray(a[i]);
+
+    }
+
+    return ;
+
+}
