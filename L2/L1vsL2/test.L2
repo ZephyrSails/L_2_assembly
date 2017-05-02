@@ -1,0 +1,11 @@
+(:go
+  (:go
+    0 0
+
+    (call :func 1)
+
+    (var >>= 1)
+
+    (return)
+  )
+)

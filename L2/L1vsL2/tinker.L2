@@ -8,26 +8,20 @@
     ((mem rsp -8) <- :printArray_ret)
     (call :printArray 1)
     :printArray_ret
+    (return)
   )
 
   (:printArray
     1 0
 
-    ((mem rsp 0) <- r12)
-    ((mem rsp 8) <- r13)
-    ((mem rsp 16) <- r14)
-
-    ; array itself
-    (array <- rdi)
-    ; index
+    (arr <- rdi)
     (i <- 0)
-    ; length of the array
     (len <- (mem rdi 0))
 
     :loop
-    (rdi <- array)
+    (rdi <- arr)
     (rsi <- i)
-    ((mem rsp -16) <- :printArrayElement_ret)
+    ((mem rsp -8) <- :printArrayElement_ret)
     (call :printArrayElement 2)
     :printArrayElement_ret
     (i++)
@@ -41,45 +35,38 @@
 
   (:printArrayElement
     2 0
-
-    ; Store the input
-    (array <- rdi)    ; the pointer to the array
-    (index <- rsi)    ; the element number to print (elements start from 0)
-
-    ; Encode & Print the index
-    (index <<= 1)
-    (index += 1)
+    (arr <- rdi)
+    (index <- rsi)
     (rdi <- index)
+    (rdi <<= 1)
+    (rdi++)
     (call print 1)
 
-    ; Print the offset of the array element in the L1 data layout
     (offset <- index)
-    (offset >>= 1)
     (offset *= 8)
 
     (offset += 8)
     (offset <<= 1)
-    (offset += 1)
+    (offset++)
     (rdi <- offset)
     (call print 1)
+    (offset >>= 1)
 
-    ; Fetch
-    (rdx <- offset)
-    (rdx >>= 1)
-    (rdx += array)
-    (ele <- (mem rdx 0))
+
+    (addr <- offset)
+    (addr += arr)
+    (ele <- (mem addr 0))
     (ele &= 1)
 
-    ; Pointer or Number?
     (cjump ele = 1 :printEle :recurseArr)
 
     :printEle
-    (rdi <- (mem rdx 0))
+    (rdi <- (mem addr 0))
     (call print 1)
-    (goto :ret_printArrayElement)
+    (return)
 
     :recurseArr
-    (rdi <- (mem rdx 0))
+    (rdi <- (mem addr 0))
     ((mem rsp -8) <- :ret_printArrayElement)
     (call :printArray 1)
 
@@ -87,9 +74,4 @@
 
     (return)
   )
-  ; difference:
-  ; In L1, we need to carefully follow the calling convention
-  ; But in L2, we don't need to care it
-  ; (we can, but not required to if we choose to use variable)
-  ; Because the complier will handle that.
 )

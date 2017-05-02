@@ -83,7 +83,6 @@ void output_function(L2::Function * f, std::ofstream * outputFile, L2::Graph * g
 int main(int argc, char **argv) {
   bool verbose;
 
-
   /* Check the input */
   if( argc < 2 ) {
   std::cerr << "Usage: " << argv[ 0 ] << " SOURCE [-v]" << std::endl;
